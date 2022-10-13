@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+						"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+						
+<mapper namespace="mapper.account">
+	<!-- 계좌개설 -->
+	<insert id="insertAccount" parameterType="com.kosta.bank.bean.Account">
+		<![CDATA[
+			insert into account(id, name, balance, sect, grade)
+			values(#{id}, #{name}, #{balance}, #{sect}, #{grade, jdbcType = VARCHAR})
+		]]>
+	</insert>
+	
+	<!-- 입금,출금 -->
+	<update id="updateBalance">
+		<![CDATA[
+			update account
+			set  balance = #{balance}
+			where id = #{id}
+		]]>
+	</update>
+	
+	<!-- 계좌조회 -->
+	<select id="selectAccount" parameterType="String" resultType="com.kosta.bank.bean.Account">
+		<![CDATA[
+			select *
+			from account
+			where id = #{id}
+		]]>
+	</select>
+	
+	<!-- 전체계좌조회 -->
+	<select id="selectAccountList" resultType="com.kosta.bank.bean.Account">
+		<![CDATA[
+			select *
+			from account
+		]]>
+	</select>
+</mapper>
